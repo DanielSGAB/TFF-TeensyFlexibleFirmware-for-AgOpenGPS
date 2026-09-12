@@ -1,0 +1,12 @@
+# C# byggfiler — bara tillfälliga, ska aldrig laddas upp
+bin/
+obj/
+*.user
+
+# Python
+__pycache__/
+*.pyc
+
+# Windows-specifikt skräp
+Thumbs.db
+desktop.ini

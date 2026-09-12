@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Samma grundinställningar som AgOpenGPS.csproj (kopierat därifrån,
+    inte gissat) — WinExe istället för bara "Exe" betyder specifikt
+    "ett Windows-fönsterprogram, inget svart konsolfönster ska visas
+    bredvid". UseWindowsForms + ImportWindowsDesktopTargets är de två
+    rader som faktiskt aktiverar WinForms-stödet i den moderna,
+    SDK-baserade projektformen för ett äldre net48-projekt.
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TeensyTool.Protocol\TeensyTool.Protocol.csproj" />
+    <!--
+      Riktig, oförändrad återanvändning av AGO:s eget Keypad-projekt
+      (SourceCode/Keypad i deras källkod) — kopierad rakt av, inte
+      omskriven. Genuint fristående, inga beroenden till AGO:s övriga
+      kärnprojekt (till skillnad från FormNumeric.cs, som beror på
+      AgOpenGPS.Core.Translations bara för en enda felsträng — därför
+      återskapar vi bara det enkla, oberoende dialogskalet runt
+      knappsatsen själv, inte hela FormNumeric).
+    -->
+    <ProjectReference Include="..\Keypad\Keypad.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      U-Turn Dual Boost-förklaringsdiagram, given direkt av personen
+      som driver det här projektet (samma bild som postats till
+      AgOpenGPS-forumet). Inbäddad direkt i .exe:n via
+      EmbeddedResource — INTE via ett separat .resx/Resources.Designer.cs
+      (som Keypad-projektet ovan använder för SINA bilder), eftersom
+      den mekanismen kräver Visual Studios designer-verktyg för att
+      genereras korrekt; att bygga den filen för hand utan verktyget
+      är onödigt riskabelt. Det moderna SDK-projektformatets egna,
+      direkta EmbeddedResource-stöd (denna rad) är en väletablerad,
+      enklare, lika robust .NET-teknik, läst i kod via
+      Assembly.GetManifestResourceStream() (se MainForm.cs).
+    -->
+    <EmbeddedResource Include="Resources\uturn_boost_diagram.png" />
+  </ItemGroup>
+
+</Project>

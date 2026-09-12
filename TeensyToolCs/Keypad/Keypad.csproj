@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <!--
+      Tillagd rad, finns INTE i AGO:s egen originalfil — deras version
+      ärver det här värdet från en delad Directory.Build.props-fil
+      som gäller för HELA deras lösning. Vi har inte den mekanismen
+      (varje eget projekt hos oss sätter TargetFramework explicit i
+      sin egen .csproj istället) — utan den här raden hade projektet
+      bokstavligen ingen målramverksinställning alls i vår miljö,
+      vilket gav "Project Keypad does not support any target
+      frameworks" vid bygge. Ingen ändring av logiken i sig, bara
+      kompletterande byggkonfiguration.
+    -->
+    <TargetFramework>net48</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Memory" Version="4.6.0" />
+    <PackageReference Include="System.Resources.Extensions" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="GenericKeypad.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="NumKeypad.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Keyboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

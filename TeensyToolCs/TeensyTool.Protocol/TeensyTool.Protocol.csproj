@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    OutputType=Library: samma sak som en ren .py-fil utan
+    "if __name__ == '__main__':"-block — den här koden gör
+    ingenting av sig själv, den är till för att ANVÄNDAS av
+    ett annat projekt (vårt kommande Forms-projekt, eller
+    testprojektet nedan).
+
+    TargetFramework satt uttryckligen till net48 här (snarare
+    än att förlita sig på en Directory.Build.props som AGO:s
+    egen lösning har) eftersom det här är ett fristående
+    projekt utanför AGO:s mappstruktur just nu — om/när det
+    här läggs in i AGO:s egen .sln-fil kan den här raden tas
+    bort och ärva samma centrala inställning som allt annat.
+  -->
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net48</TargetFramework>
+  </PropertyGroup>
+
+</Project>
